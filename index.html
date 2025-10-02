@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Misha Campbell — Juge à Los Santos</title>
+  <meta name="description"
+    content="Fiche RP de Misha Campbell, juge à la Cour Supérieure de Los Santos. Design sérieux noir/or, parallax optimisé, RP only." />
+  <meta name="color-scheme" content="dark light" />
+  <!-- Open Graph / Discord preview -->
+  <meta property="og:title" content="Misha Campbell — Juge à Los Santos" />
+  <meta property="og:description" content="Serious RP • Cour Supérieure de Los Santos • Fiche officielle" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="images/skyline-ls-night.png" />
+  <meta name="theme-color" content="#0a0b0e" />
+  <!-- Favicon (SVG inline, léger) -->
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' rx='48' fill='%230a0b0e'/%3E%3Cpath d='M64 176h128M86 176V88h84v88' stroke='%23d7b66a' stroke-width='14' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='96' cy='112' r='6' fill='%23d7b66a'/%3E%3Ccircle cx='160' cy='112' r='6' fill='%23d7b66a'/%3E%3C/svg%3E" />
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap"
+    rel="stylesheet">
+  <!-- Preload key images -->
+  <link rel="preload" as="image" href="images/skyline-ls-night.png" />
+  <link rel="preload" as="image" href="images/courthouse-ls.png" />
+  <link rel="preload" as="image" href="images/courtroom-judge.png" />
+  <style>
+    /* ===== THEME SÉRIEUX (NOIR/OR) + VIBE GTA ===== */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box
+    }
+
+    :root {
+      --bg: #0a0b0e;
+      --panel: #0f1218;
+      --panel-2: #111520;
+      --ink: #e9edf6;
+      --muted: #a0a9ba;
+      --accent: #d7b66a;
+      --accent-soft: rgba(215, 182, 106, .18);
+      --line: rgba(255, 255, 255, .06);
+      --shadow: 0 12px 40px rgba(0, 0, 0, .45);
+      --radius: 16px;
+      --hero-img: url('images/skyline-ls-night.png');
+      /* 4) Skyline by night */
+      --gta-bg: url('images/skyline-ls-night.png');
+      /* global vibe = skyline blur */
+      --strip-1: url('images/courthouse-ls.png');
+      /* 1) Tribunal */
+      --strip-2: url('images/courtroom-judge.png');
+      /* 2) Salle d’audience */
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none
+    }
+
+    /* Fond global GTA + grain */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background-image: var(--gta-bg);
+      background-size: cover;
+      background-position: center;
+      filter: grayscale(.2) contrast(1.05) blur(1.6px);
+      opacity: .28
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image:
+        linear-gradient(135deg, rgba(255, 255, 255, .03) 0 1px, transparent 1px 18px),
+        radial-gradient(1800px 800px at -10% -10%, rgba(215, 182, 106, .08), transparent 50%),
+        radial-gradient(1600px 700px at 110% -5%, rgba(215, 182, 106, .06), transparent 60%);
+      background-size: 18px 18px, auto, auto;
+      mix-blend-mode: overlay;
+      opacity: .7
+    }
+
+    /* ===== NAV ===== */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      backdrop-filter: blur(10px);
+      background: rgba(10, 11, 14, .55);
+      border-bottom: 1px solid var(--line)
+    }
+
+    .nav-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 18px
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .logotype {
+      font-family: 'Bebas Neue', system-ui, sans-serif;
+      font-size: 30px;
+      letter-spacing: .8px
+    }
+
+    .crest {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(145deg, rgba(215, 182, 106, .2), rgba(215, 182, 106, .06));
+      border: 1px solid var(--accent-soft)
+    }
+
+    .menu {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap
+    }
+
+    .menu a {
+      opacity: .9
+    }
+
+    /* ===== HERO vitrinesque (serious showcase) ===== */
+    .hero {
+      position: relative;
+      background-image: var(--hero-img);
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, .6), rgba(10, 11, 14, .92))
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 64px 18px 40px
+    }
+
+    .stage-card {
+      width: min(100%, 1200px);
+      background: rgba(15, 18, 24, .75);
+      backdrop-filter: blur(6px);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      overflow: hidden
+    }
+
+    .stage-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 16px 18px;
+      background: linear-gradient(180deg, rgba(215, 182, 106, .12), transparent)
+    }
+
+    .stage-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 8vw, 70px);
+      letter-spacing: .6px;
+      margin: 8px 0 0
+    }
+
+    .stage-sub {
+      color: var(--muted);
+      margin: 0 0 10px
+    }
+
+    .stage-media {
+      position: relative;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(180deg, #0d1118, #0b0e13);
+      aspect-ratio: 16/7
+    }
+
+    .seal-mark {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      opacity: .16;
+      filter: grayscale(1);
+      pointer-events: none;
+      background: url('images/ls-superior-court-seal.png') center/420px 420px no-repeat
+    }
+
+    .cta {
+      display: flex;
+      gap: 12px;
+      margin: 20px 18px 22px;
+      flex-wrap: wrap
+    }
+
+    .btn {
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: #0f1420;
+      color: var(--ink);
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform .05s ease, background .2s ease
+    }
+
+    .btn:hover {
+      background: #0c111b
+    }
+
+    .btn:active {
+      transform: translateY(1px)
+    }
+
+    .btn.primary {
+      background: linear-gradient(90deg, var(--accent), rgba(215, 182, 106, .85));
+      color: #0b0e13;
+      border: none
+    }
+
+    /* ===== STAT STRIP (serious) ===== */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      padding: 16px 18px;
+      border-top: 1px solid var(--line);
+      background: rgba(0, 0, 0, .25)
+    }
+
+    .stat {
+      background: rgba(255, 255, 255, .02);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+      text-align: center
+    }
+
+    .stat h4 {
+      margin: 0;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 30px;
+      color: var(--accent)
+    }
+
+    .stat p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 13px
+    }
+
+    /* ===== CONTENT ===== */
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 26px 18px 80px;
+      display: grid;
+      gap: 24px;
+      grid-template-columns: 1fr 1fr
+    }
+
+    .card {
+      background: linear-gradient(180deg, var(--panel), var(--panel-2));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px
+    }
+
+    section h2 {
+      margin: 0 0 6px;
+      font-size: 22px
+    }
+
+    .lead {
+      margin: 0 0 18px;
+      color: var(--muted)
+    }
+
+    .kv {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 10px 16px
+    }
+
+    .kv div {
+      padding: 8px 0;
+      border-bottom: 1px dashed var(--line)
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px
+    }
+
+    .chip {
+      padding: 8px 10px;
+      font-size: 13px;
+      background: #0c111b;
+      border: 1px solid var(--line);
+      border-radius: 999px
+    }
+
+    .rp {
+      border-left: 3px solid var(--accent)
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 28px 18px 70px;
+      color: var(--muted);
+      text-align: center
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width:980px) {
+      .stats {
+        grid-template-columns: repeat(2, 1fr)
+      }
+    }
+
+    @media (max-width:900px) {
+      .container {
+        grid-template-columns: 1fr
+      }
+
+      .kv {
+        grid-template-columns: 1fr
+      }
+    }
+
+    /* iOS/Android fix: parallax fallback sur mobile pour performance */
+    @media (max-width: 820px) {
+      .hero {
+        background-attachment: scroll
+      }
+    }
+
+    /* Lists personalisation */
+    ul {
+      font-size: 13px;
+      list-style: none;
+      padding: 0;
+      margin: 0
+    }
+
+    li {
+      margin-bottom: 8px
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <div class="crest">🔰</div>
+        <span class="logotype">LOS SANTOS SUPERIOR COURT</span>
+      </div>
+      <div class="menu">
+        <a href="#rp">RP</a>
+        <a href="#story">Histoire</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO (serious showcase) -->
+  <section class="hero" aria-label="Skyline de Los Santos">
+    <div class="hero-inner">
+      <div class="stage-card">
+        <div class="stage-head">
+          <div>
+            <h1 class="stage-title">Misha Campbell</h1>
+            <p class="stage-sub">Juge — Cour Supérieure de Los Santos • Nouvel arrivant • Impartial • Méthodique</p>
+          </div>
+          <div class="tags" aria-hidden="true">
+            <span class="chip" style="border-color:var(--accent-soft);background:var(--accent-soft)">Ultima RP</span>
+            <span class="chip" style="border-color:var(--accent-soft);background:var(--accent-soft)">Los Santos</span>
+          </div>
+        </div>
+        <div class="stage-media">
+          <!-- Emblème watermark (3) -->
+          <div class="seal-mark" aria-hidden="true"></div>
+        </div>
+        <div class="cta">
+          <a class="btn primary" href="#rp">Voir la partie RP</a>
+          <button class="btn" id="copy-brief">Copier la bio courte</button>
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <h4>100%</h4>
+            <p>Impartialité revendiquée</p>
+          </div>
+          <div class="stat">
+            <h4>0</h4>
+            <p>Conflits d'intérêt</p>
+          </div>
+          <div class="stat">
+            <h4>3</h4>
+            <p>Défense → Parquet → Juge</p>
+          </div>
+          <div class="stat">
+            <h4>1</h4>
+            <p>Arrivée officielle à L.S.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRIP PARALLAX 1 -->
+  <section class="hero" style="background-image:var(--strip-1);min-height:38vh" aria-label="Tribunal de Los Santos">
+    <div class="hero-inner">
+      <div class="stage" style="display:grid;place-items:center">
+        <div class="chip" style="border-color:var(--accent-soft);background:var(--accent-soft)">Brief RP</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RP CONTENT -->
+  <main class="container" id="rp">
+    <section class="card rp" id="identite">
+      <h2>Identité</h2>
+      <p class="lead">Données utilisables en jeu.</p>
+      <div class="kv">
+        <div><strong>Nom</strong></div>
+        <div>Misha Campbell</div>
+        <div><strong>Âge</strong></div>
+        <div>32 ans</div>
+        <div><strong>Statut</strong></div>
+        <div>Juge — Los Santos Superior Court</div>
+        <div><strong>Contexte</strong></div>
+        <div>Appelé officiellement pour occuper le poste (nouvel arrivant)</div>
+      </div>
+      <h2>Phrases Signature</h2>
+      <ul>
+        <li><strong>« Ce n’est pas ce qu’on sait qui compte, c’est ce qu’on peut prouver. »</strong> <button class="btn"
+            data-copy>Copier</button></li>
+        <li><strong>« Dans ma salle d’audience, seule la vérité a le droit de parole. »</strong> <button class="btn"
+            data-copy>Copier</button></li>
+      </ul>
+    </section>
+
+    <section class="card rp" id="profil">
+      <h2>Profil</h2>
+      <p class="lead">Qualités/Défauts & style d'audience.</p>
+      <div class="kv" style="margin-bottom:12px;">
+        <div><strong>Qualités</strong></div>
+        <div class="chips">
+          <span class="chip">Impartial</span>
+          <span class="chip">Méthodique</span>
+          <span class="chip">Incorruptible</span>
+          <span class="chip">Respectueux</span>
+          <span class="chip">Croit en la réinsertion</span>
+        </div>
+        <div><strong>Défauts</strong></div>
+        <div class="chips">
+          <span class="chip">Froid</span>
+          <span class="chip">Distant</span>
+          <span class="chip">Inflexible avec récidivistes</span>
+          <span class="chip">Vie perso limitée</span>
+        </div>
+      </div>
+      <div class="kv">
+        <div><strong>Style RP</strong></div>
+        <div>Formel, factuel, exige des preuves. Ne tolère pas le désordre en audience.</div>
+        <div><strong>Relations</strong></div>
+        <div>Collabore avec LSPD/BCSO/DOJ, sanctionne tout abus. Respect mutuel avec les avocats.</div>
+      </div>
+    </section>
+
+    <section class="card rp" id="story" style="grid-column:1 / -1">
+      <h2>Histoire</h2>
+      <p class="lead">Mini-background narratif.</p>
+      <p>Misha Campbell est né à San Francisco dans une famille modeste. Son père est décédé avant même sa naissance, il
+        ne l’a donc jamais connu. Élevé seul par sa mère, enseignante, il a grandi avec des valeurs de discipline, de
+        respect et de travail. Ce manque paternel a forgé en lui une volonté d’être reconnu et de s’élever grâce au
+        mérite.</p>
+      <p>Brillant étudiant en droit, il a rapidement gravi les échelons dans le système judiciaire. Après une carrière
+        déjà marquée par plusieurs affaires importantes à San Francisco, il a été repéré pour son intégrité et sa
+        capacité à rester impartial, même sous pression.</p>
+      <p>À 32 ans, il est officiellement nommé juge à la Cour Supérieure de Los Santos. Fraîchement arrivé en ville, il
+        incarne une nouvelle figure d’autorité, appelée à garantir que la justice soit rendue de manière ferme et
+        équitable dans un environnement gangrené par le crime et la corruption. Calme, droit, mais inflexible, il résume
+        sa philosophie ainsi : « Ce n’est pas ce qu’on sait qui compte, c’est ce qu’on peut prouver. »</p>
+    </section>
+  </main>
+
+  <!-- STRIP PARALLAX 2 (Salle d'audience) -->
+  <section class="hero" style="background-image:var(--strip-2);min-height:34vh" aria-label="Salle d’audience">
+    <div class="hero-inner">
+      <div class="stage" style="display:grid;place-items:center">
+        <!-- <div class="chip" style="border-color:var(--accent-soft);background:var(--accent-soft)">Salle d’audience</div> -->
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © <span id="year"></span> Fiche RP — Ultima RP GitHub Pages
+    ready.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Copier bio courte
+    const brief = `Misha Campbell, 32 ans. Juge nommé à la Cour Supérieure de Los Santos, nouvel arrivant en ville. Impartial, méthodique, incorruptible. « Ce n’est pas ce qu’on sait qui compte, c’est ce qu’on peut prouver. »`;
+    const briefBtn = document.getElementById('copy-brief');
+    if (briefBtn) { briefBtn.addEventListener('click', async () => { try { await navigator.clipboard.writeText(brief); toast('Bio courte copiée !'); } catch (e) { toast('Impossible de copier'); } }); }
+
+    // Copier phrases signature
+    document.querySelectorAll('[data-copy]').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        const text = e.target.parentElement.querySelector('strong').textContent.trim();
+        try { await navigator.clipboard.writeText(text); toast('Phrase copiée !'); } catch (err) { toast('Impossible de copier'); }
+      });
+    });
+
+    function toast(msg) {
+      const t = document.createElement('div'); t.textContent = msg; Object.assign(t.style, {
+        position: 'fixed', bottom: '18px', right: '18px', padding: '10px 14px', background: 'rgba(20,24,36,.92)', border: '1px solid rgba(255,255,255,.1)', borderRadius: '12px', boxShadow: 'var(--shadow)', color: 'var(--ink)', zIndex: 1000
+      }); document.body.appendChild(t); setTimeout(() => t.remove(), 1800);
+    }
+  </script>
+</body>
+
+</html>
